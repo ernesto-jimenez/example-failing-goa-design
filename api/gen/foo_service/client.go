@@ -27,7 +27,7 @@ func NewClient(fooMethod goa.Endpoint) *Client {
 }
 
 // FooMethod calls the "FooMethod" endpoint of the "FooService" service.
-func (c *Client) FooMethod(ctx context.Context, p []*ExampleType) (res []*ExampleType, err error) {
+func (c *Client) FooMethod(ctx context.Context, p *FooMethodPayload) (res []*ExampleType, err error) {
 	var ires interface{}
 	ires, err = c.FooMethodEndpoint(ctx, p)
 	if err != nil {

@@ -13,6 +13,12 @@ import (
 	goa "goa.design/goa/v3/pkg"
 )
 
+// FooMethodRequestBody is the type of the "FooService" service "FooMethod"
+// endpoint HTTP request body.
+type FooMethodRequestBody struct {
+	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+}
+
 // FooMethodResponseBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP response body.
 type FooMethodResponseBody []*ExampleTypeResponse
@@ -25,11 +31,6 @@ type ExampleTypeResponse struct {
 // ExternalTypeResponse is used to define fields on response body types.
 type ExternalTypeResponse struct {
 	Field string `form:"Field" json:"Field" xml:"Field"`
-}
-
-// ExampleTypeRequestBody is used to define fields on request body types.
-type ExampleTypeRequestBody struct {
-	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
 }
 
 // ExternalTypeRequestBody is used to define fields on request body types.
@@ -47,21 +48,21 @@ func NewFooMethodResponseBody(res []*fooservice.ExampleType) FooMethodResponseBo
 	return body
 }
 
-// NewFooMethodExampleType builds a FooService service FooMethod endpoint
-// payload.
-func NewFooMethodExampleType(body []*ExampleTypeRequestBody) []*fooservice.ExampleType {
-	v := make([]*fooservice.ExampleType, len(body))
-	for i, val := range body {
-		v[i] = unmarshalExampleTypeRequestBodyToFooserviceExampleType(val)
+// NewFooMethodPayload builds a FooService service FooMethod endpoint payload.
+func NewFooMethodPayload(body *FooMethodRequestBody) *fooservice.FooMethodPayload {
+	v := &fooservice.FooMethodPayload{}
+	if body.External != nil {
+		v.External = unmarshalTypesExternalTypeRequestBodyToTypesExternalType(body.External)
 	}
+
 	return v
 }
 
-// ValidateExampleTypeRequestBody runs the validations defined on
-// ExampleTypeRequestBody
-func ValidateExampleTypeRequestBody(body *ExampleTypeRequestBody) (err error) {
+// ValidateFooMethodRequestBody runs the validations defined on
+// FooMethodRequestBody
+func ValidateFooMethodRequestBody(body *FooMethodRequestBody) (err error) {
 	if body.External != nil {
-		if err2 := ValidateExternalTypeRequestBody(body.External); err2 != nil {
+		if err2 := ValidateTypesExternalTypeRequestBody(body.External); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}

@@ -13,14 +13,15 @@ import (
 	goa "goa.design/goa/v3/pkg"
 )
 
+// FooMethodRequestBody is the type of the "FooService" service "FooMethod"
+// endpoint HTTP request body.
+type FooMethodRequestBody struct {
+	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+}
+
 // FooMethodResponseBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP response body.
 type FooMethodResponseBody []*ExampleTypeResponse
-
-// ExampleTypeRequestBody is used to define fields on request body types.
-type ExampleTypeRequestBody struct {
-	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
-}
 
 // ExternalTypeRequestBody is used to define fields on request body types.
 type ExternalTypeRequestBody struct {
@@ -37,12 +38,12 @@ type ExternalTypeResponse struct {
 	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
 }
 
-// NewExampleTypeRequestBody builds the HTTP request body from the payload of
-// the "FooMethod" endpoint of the "FooService" service.
-func NewExampleTypeRequestBody(p []*fooservice.ExampleType) []*ExampleTypeRequestBody {
-	body := make([]*ExampleTypeRequestBody, len(p))
-	for i, val := range p {
-		body[i] = marshalFooserviceExampleTypeToExampleTypeRequestBody(val)
+// NewFooMethodRequestBody builds the HTTP request body from the payload of the
+// "FooMethod" endpoint of the "FooService" service.
+func NewFooMethodRequestBody(p *fooservice.FooMethodPayload) *FooMethodRequestBody {
+	body := &FooMethodRequestBody{}
+	if p.External != nil {
+		body.External = marshalTypesExternalTypeToTypesExternalTypeRequestBody(p.External)
 	}
 	return body
 }

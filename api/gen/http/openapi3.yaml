@@ -17,21 +17,10 @@ paths:
                 content:
                     application/json:
                         schema:
-                            type: array
-                            items:
-                                $ref: '#/components/schemas/ExampleType'
-                            example:
-                                - External:
-                                    Field: Nisi molestiae suscipit voluptates voluptates.
-                                - External:
-                                    Field: Nisi molestiae suscipit voluptates voluptates.
+                            $ref: '#/components/schemas/FooMethodRequestBody'
                         example:
-                            - External:
-                                Field: Nisi molestiae suscipit voluptates voluptates.
-                            - External:
-                                Field: Nisi molestiae suscipit voluptates voluptates.
-                            - External:
-                                Field: Nisi molestiae suscipit voluptates voluptates.
+                            External:
+                                Field: Eos quisquam et nisi molestiae.
             responses:
                 "200":
                     description: OK response.
@@ -40,42 +29,40 @@ paths:
                             schema:
                                 type: array
                                 items:
-                                    $ref: '#/components/schemas/ExampleType'
+                                    $ref: '#/components/schemas/FooMethodRequestBody'
                                 example:
                                     - External:
-                                        Field: Quasi ut mollitia id similique facilis corrupti.
+                                        Field: Voluptates voluptates quia non.
                                     - External:
-                                        Field: Quasi ut mollitia id similique facilis corrupti.
-                                    - External:
-                                        Field: Quasi ut mollitia id similique facilis corrupti.
-                                    - External:
-                                        Field: Quasi ut mollitia id similique facilis corrupti.
+                                        Field: Voluptates voluptates quia non.
                             example:
                                 - External:
-                                    Field: Quasi ut mollitia id similique facilis corrupti.
+                                    Field: Voluptates voluptates quia non.
                                 - External:
-                                    Field: Quasi ut mollitia id similique facilis corrupti.
+                                    Field: Voluptates voluptates quia non.
                                 - External:
-                                    Field: Quasi ut mollitia id similique facilis corrupti.
+                                    Field: Voluptates voluptates quia non.
+                                - External:
+                                    Field: Voluptates voluptates quia non.
 components:
     schemas:
-        ExampleType:
+        ExternalType:
+            type: object
+            properties:
+                Field:
+                    type: string
+                    example: Non omnis.
+            example:
+                Field: Numquam delectus ut excepturi dolorem autem.
+            required:
+                - Field
+        FooMethodRequestBody:
             type: object
             properties:
                 External:
                     $ref: '#/components/schemas/ExternalType'
             example:
                 External:
-                    Field: Nisi molestiae suscipit voluptates voluptates.
-        ExternalType:
-            type: object
-            properties:
-                Field:
-                    type: string
-                    example: Eum voluptatem et blanditiis tempora.
-            example:
-                Field: Laborum illo distinctio rerum quisquam.
-            required:
-                - Field
+                    Field: Eos quisquam et nisi molestiae.
 tags:
     - name: FooService

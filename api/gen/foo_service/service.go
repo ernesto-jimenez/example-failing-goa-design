@@ -17,7 +17,7 @@ import (
 // Service is the FooService service interface.
 type Service interface {
 	// FooMethod implements FooMethod.
-	FooMethod(context.Context, []*ExampleType) (res []*ExampleType, err error)
+	FooMethod(context.Context, *FooMethodPayload) (res []*ExampleType, err error)
 }
 
 // ServiceName is the name of the service as defined in the design. This is the
@@ -31,5 +31,11 @@ const ServiceName = "FooService"
 var MethodNames = [1]string{"FooMethod"}
 
 type ExampleType struct {
+	External *types.ExternalType
+}
+
+// FooMethodPayload is the payload type of the FooService service FooMethod
+// method.
+type FooMethodPayload struct {
 	External *types.ExternalType
 }

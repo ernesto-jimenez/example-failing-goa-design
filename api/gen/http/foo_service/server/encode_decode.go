@@ -36,7 +36,7 @@ func EncodeFooMethodResponse(encoder func(context.Context, http.ResponseWriter) 
 func DecodeFooMethodRequest(mux goahttp.Muxer, decoder func(*http.Request) goahttp.Decoder) func(*http.Request) (interface{}, error) {
 	return func(r *http.Request) (interface{}, error) {
 		var (
-			body []*ExampleTypeRequestBody
+			body FooMethodRequestBody
 			err  error
 		)
 		err = decoder(r).Decode(&body)
@@ -46,26 +46,19 @@ func DecodeFooMethodRequest(mux goahttp.Muxer, decoder func(*http.Request) goaht
 			}
 			return nil, goa.DecodePayloadError(err.Error())
 		}
-		payload := NewFooMethodExampleType(body)
+		err = ValidateFooMethodRequestBody(&body)
+		if err != nil {
+			return nil, err
+		}
+		payload := NewFooMethodPayload(&body)
 
 		return payload, nil
 	}
 }
 
-// unmarshalExampleTypeRequestBodyToFooserviceExampleType builds a value of
-// type *fooservice.ExampleType from a value of type *ExampleTypeRequestBody.
-func unmarshalExampleTypeRequestBodyToFooserviceExampleType(v *ExampleTypeRequestBody) *fooservice.ExampleType {
-	res := &fooservice.ExampleType{}
-	if v.External != nil {
-		res.External = unmarshalExternalTypeRequestBodyToTypesExternalType(v.External)
-	}
-
-	return res
-}
-
-// unmarshalExternalTypeRequestBodyToTypesExternalType builds a value of type
-// *types.ExternalType from a value of type *ExternalTypeRequestBody.
-func unmarshalExternalTypeRequestBodyToTypesExternalType(v *ExternalTypeRequestBody) *types.ExternalType {
+// unmarshalTypesExternalTypeRequestBodyToTypesExternalType builds a value of
+// type *types.ExternalType from a value of type *types.ExternalTypeRequestBody.
+func unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTypeRequestBody) *types.ExternalType {
 	if v == nil {
 		return nil
 	}

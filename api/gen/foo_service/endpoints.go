@@ -35,7 +35,7 @@ func (e *Endpoints) Use(m func(goa.Endpoint) goa.Endpoint) {
 // "FooMethod" of service "FooService".
 func NewFooMethodEndpoint(s Service) goa.Endpoint {
 	return func(ctx context.Context, req interface{}) (interface{}, error) {
-		p := req.([]*ExampleType)
+		p := req.(*FooMethodPayload)
 		return s.FooMethod(ctx, p)
 	}
 }
