@@ -103,19 +103,19 @@ func DecodeFooMethodResponse(decoder func(*http.Response) goahttp.Decoder, resto
 func marshalFooserviceExampleTypeToExampleTypeRequestBody(v *fooservice.ExampleType) *ExampleTypeRequestBody {
 	res := &ExampleTypeRequestBody{}
 	if v.External != nil {
-		res.External = marshalTypesExternalTypeToTypesExternalTypeRequestBody(v.External)
+		res.External = marshalTypesExternalTypeToExternalTypeRequestBody(v.External)
 	}
 
 	return res
 }
 
-// marshalTypesExternalTypeToTypesExternalTypeRequestBody builds a value of
-// type *types.ExternalTypeRequestBody from a value of type *types.ExternalType.
-func marshalTypesExternalTypeToTypesExternalTypeRequestBody(v *types.ExternalType) *types.ExternalTypeRequestBody {
+// marshalTypesExternalTypeToExternalTypeRequestBody builds a value of type
+// *ExternalTypeRequestBody from a value of type *types.ExternalType.
+func marshalTypesExternalTypeToExternalTypeRequestBody(v *types.ExternalType) *ExternalTypeRequestBody {
 	if v == nil {
 		return nil
 	}
-	res := &types.ExternalTypeRequestBody{
+	res := &ExternalTypeRequestBody{
 		Field: v.Field,
 	}
 
@@ -127,15 +127,15 @@ func marshalTypesExternalTypeToTypesExternalTypeRequestBody(v *types.ExternalTyp
 func marshalExampleTypeRequestBodyToFooserviceExampleType(v *ExampleTypeRequestBody) *fooservice.ExampleType {
 	res := &fooservice.ExampleType{}
 	if v.External != nil {
-		res.External = marshalTypesExternalTypeRequestBodyToTypesExternalType(v.External)
+		res.External = marshalExternalTypeRequestBodyToTypesExternalType(v.External)
 	}
 
 	return res
 }
 
-// marshalTypesExternalTypeRequestBodyToTypesExternalType builds a value of
-// type *types.ExternalType from a value of type *types.ExternalTypeRequestBody.
-func marshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTypeRequestBody) *types.ExternalType {
+// marshalExternalTypeRequestBodyToTypesExternalType builds a value of type
+// *types.ExternalType from a value of type *ExternalTypeRequestBody.
+func marshalExternalTypeRequestBodyToTypesExternalType(v *ExternalTypeRequestBody) *types.ExternalType {
 	if v == nil {
 		return nil
 	}
@@ -151,15 +151,15 @@ func marshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTyp
 func unmarshalExampleTypeResponseToFooserviceExampleType(v *ExampleTypeResponse) *fooservice.ExampleType {
 	res := &fooservice.ExampleType{}
 	if v.External != nil {
-		res.External = unmarshalTypesExternalTypeResponseToTypesExternalType(v.External)
+		res.External = unmarshalExternalTypeResponseToTypesExternalType(v.External)
 	}
 
 	return res
 }
 
-// unmarshalTypesExternalTypeResponseToTypesExternalType builds a value of type
-// *types.ExternalType from a value of type *types.ExternalTypeResponse.
-func unmarshalTypesExternalTypeResponseToTypesExternalType(v *types.ExternalTypeResponse) *types.ExternalType {
+// unmarshalExternalTypeResponseToTypesExternalType builds a value of type
+// *types.ExternalType from a value of type *ExternalTypeResponse.
+func unmarshalExternalTypeResponseToTypesExternalType(v *ExternalTypeResponse) *types.ExternalType {
 	if v == nil {
 		return nil
 	}

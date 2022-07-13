@@ -61,7 +61,7 @@ func NewFooMethodExampleType(body []*ExampleTypeRequestBody) []*fooservice.Examp
 // ExampleTypeRequestBody
 func ValidateExampleTypeRequestBody(body *ExampleTypeRequestBody) (err error) {
 	if body.External != nil {
-		if err2 := ValidateTypesExternalTypeRequestBody(body.External); err2 != nil {
+		if err2 := ValidateExternalTypeRequestBody(body.External); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}

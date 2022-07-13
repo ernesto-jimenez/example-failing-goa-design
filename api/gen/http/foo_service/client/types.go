@@ -62,7 +62,7 @@ func NewFooMethodExampleTypeOK(body []*ExampleTypeResponse) []*fooservice.Exampl
 // ExampleTypeResponse
 func ValidateExampleTypeResponse(body *ExampleTypeResponse) (err error) {
 	if body.External != nil {
-		if err2 := ValidateTypesExternalTypeResponse(body.External); err2 != nil {
+		if err2 := ValidateExternalTypeResponse(body.External); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}

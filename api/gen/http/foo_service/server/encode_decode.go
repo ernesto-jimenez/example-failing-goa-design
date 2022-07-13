@@ -57,15 +57,15 @@ func DecodeFooMethodRequest(mux goahttp.Muxer, decoder func(*http.Request) goaht
 func unmarshalExampleTypeRequestBodyToFooserviceExampleType(v *ExampleTypeRequestBody) *fooservice.ExampleType {
 	res := &fooservice.ExampleType{}
 	if v.External != nil {
-		res.External = unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v.External)
+		res.External = unmarshalExternalTypeRequestBodyToTypesExternalType(v.External)
 	}
 
 	return res
 }
 
-// unmarshalTypesExternalTypeRequestBodyToTypesExternalType builds a value of
-// type *types.ExternalType from a value of type *types.ExternalTypeRequestBody.
-func unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTypeRequestBody) *types.ExternalType {
+// unmarshalExternalTypeRequestBodyToTypesExternalType builds a value of type
+// *types.ExternalType from a value of type *ExternalTypeRequestBody.
+func unmarshalExternalTypeRequestBodyToTypesExternalType(v *ExternalTypeRequestBody) *types.ExternalType {
 	if v == nil {
 		return nil
 	}
@@ -81,19 +81,19 @@ func unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalT
 func marshalFooserviceExampleTypeToExampleTypeResponse(v *fooservice.ExampleType) *ExampleTypeResponse {
 	res := &ExampleTypeResponse{}
 	if v.External != nil {
-		res.External = marshalTypesExternalTypeToTypesExternalTypeResponse(v.External)
+		res.External = marshalTypesExternalTypeToExternalTypeResponse(v.External)
 	}
 
 	return res
 }
 
-// marshalTypesExternalTypeToTypesExternalTypeResponse builds a value of type
-// *types.ExternalTypeResponse from a value of type *types.ExternalType.
-func marshalTypesExternalTypeToTypesExternalTypeResponse(v *types.ExternalType) *types.ExternalTypeResponse {
+// marshalTypesExternalTypeToExternalTypeResponse builds a value of type
+// *ExternalTypeResponse from a value of type *types.ExternalType.
+func marshalTypesExternalTypeToExternalTypeResponse(v *types.ExternalType) *ExternalTypeResponse {
 	if v == nil {
 		return nil
 	}
-	res := &types.ExternalTypeResponse{
+	res := &ExternalTypeResponse{
 		Field: v.Field,
 	}
 

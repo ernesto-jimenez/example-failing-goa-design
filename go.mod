@@ -2,7 +2,7 @@ module github.com/ernesto-jimenez/example-failing-goa-design
 
 go 1.18
 
-require goa.design/goa/v3 v3.7.11-0.20220712055856-ff403eb97809
+require goa.design/goa/v3 v3.7.11-0.20220713194040-5a38101ea510
 
 require (
 	github.com/dimfeld/httppath v0.0.0-20170720192232-ee938bf73598 // indirect
