@@ -19,11 +19,13 @@ paths:
             summary: FooMethod FooService
             operationId: FooService#FooMethod
             parameters:
-                - name: FooMethodRequestBody
+                - name: array
                   in: body
                   required: true
                   schema:
-                    $ref: '#/definitions/FooServiceFooMethodRequestBody'
+                    type: array
+                    items:
+                        $ref: '#/definitions/ExampleTypeRequestBody'
             responses:
                 "200":
                     description: OK response.
@@ -34,6 +36,15 @@ paths:
             schemes:
                 - http
 definitions:
+    ExampleTypeRequestBody:
+        title: ExampleTypeRequestBody
+        type: object
+        properties:
+            External:
+                $ref: '#/definitions/ExternalTypeRequestBody'
+        example:
+            External:
+                Field: Nisi molestiae suscipit voluptates voluptates.
     ExampleTypeResponse:
         title: ExampleTypeResponse
         type: object
@@ -42,16 +53,16 @@ definitions:
                 $ref: '#/definitions/ExternalTypeResponse'
         example:
             External:
-                Field: Voluptates voluptates quia non.
+                Field: Quasi ut mollitia id similique facilis corrupti.
     ExternalTypeRequestBody:
         title: ExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Facilis exercitationem qui.
+                example: Omnis amet.
         example:
-            Field: Praesentium sed.
+            Field: Delectus ut excepturi dolorem.
         required:
             - Field
     ExternalTypeResponse:
@@ -60,17 +71,8 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Ut mollitia id similique.
+                example: Exercitationem qui ab.
         example:
-            Field: Corrupti distinctio ut.
+            Field: Sed ratione.
         required:
             - Field
-    FooServiceFooMethodRequestBody:
-        title: FooServiceFooMethodRequestBody
-        type: object
-        properties:
-            External:
-                $ref: '#/definitions/ExternalTypeRequestBody'
-        example:
-            External:
-                Field: Eos quisquam et nisi molestiae.

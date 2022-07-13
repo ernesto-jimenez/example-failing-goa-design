@@ -40,11 +40,11 @@ func (c *Client) BuildFooMethodRequest(ctx context.Context, v interface{}) (*htt
 // FooService FooMethod server.
 func EncodeFooMethodRequest(encoder func(*http.Request) goahttp.Encoder) func(*http.Request, interface{}) error {
 	return func(req *http.Request, v interface{}) error {
-		p, ok := v.(*fooservice.ExampleType)
+		p, ok := v.([]*fooservice.ExampleType)
 		if !ok {
-			return goahttp.ErrInvalidType("FooService", "FooMethod", "*fooservice.ExampleType", v)
+			return goahttp.ErrInvalidType("FooService", "FooMethod", "[]*fooservice.ExampleType", v)
 		}
-		body := NewFooMethodRequestBody(p)
+		body := NewExampleTypeRequestBody(p)
 		if err := encoder(req).Encode(&body); err != nil {
 			return goahttp.ErrEncodingError("FooService", "FooMethod", err)
 		}
@@ -98,22 +98,44 @@ func DecodeFooMethodResponse(decoder func(*http.Response) goahttp.Decoder, resto
 	}
 }
 
-// marshalTypesExternalTypeToExternalTypeRequestBody builds a value of type
-// *ExternalTypeRequestBody from a value of type *types.ExternalType.
-func marshalTypesExternalTypeToExternalTypeRequestBody(v *types.ExternalType) *ExternalTypeRequestBody {
+// marshalFooserviceExampleTypeToExampleTypeRequestBody builds a value of type
+// *ExampleTypeRequestBody from a value of type *fooservice.ExampleType.
+func marshalFooserviceExampleTypeToExampleTypeRequestBody(v *fooservice.ExampleType) *ExampleTypeRequestBody {
+	res := &ExampleTypeRequestBody{}
+	if v.External != nil {
+		res.External = marshalTypesExternalTypeToTypesExternalTypeRequestBody(v.External)
+	}
+
+	return res
+}
+
+// marshalTypesExternalTypeToTypesExternalTypeRequestBody builds a value of
+// type *types.ExternalTypeRequestBody from a value of type *types.ExternalType.
+func marshalTypesExternalTypeToTypesExternalTypeRequestBody(v *types.ExternalType) *types.ExternalTypeRequestBody {
 	if v == nil {
 		return nil
 	}
-	res := &ExternalTypeRequestBody{
+	res := &types.ExternalTypeRequestBody{
 		Field: v.Field,
 	}
 
 	return res
 }
 
-// marshalExternalTypeRequestBodyToTypesExternalType builds a value of type
-// *types.ExternalType from a value of type *ExternalTypeRequestBody.
-func marshalExternalTypeRequestBodyToTypesExternalType(v *ExternalTypeRequestBody) *types.ExternalType {
+// marshalExampleTypeRequestBodyToFooserviceExampleType builds a value of type
+// *fooservice.ExampleType from a value of type *ExampleTypeRequestBody.
+func marshalExampleTypeRequestBodyToFooserviceExampleType(v *ExampleTypeRequestBody) *fooservice.ExampleType {
+	res := &fooservice.ExampleType{}
+	if v.External != nil {
+		res.External = marshalTypesExternalTypeRequestBodyToTypesExternalType(v.External)
+	}
+
+	return res
+}
+
+// marshalTypesExternalTypeRequestBodyToTypesExternalType builds a value of
+// type *types.ExternalType from a value of type *types.ExternalTypeRequestBody.
+func marshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTypeRequestBody) *types.ExternalType {
 	if v == nil {
 		return nil
 	}

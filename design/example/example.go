@@ -15,7 +15,7 @@ var ExampleType = Type("ExampleType", func() {
 
 var _ = Service("FooService", func() {
 	Method("FooMethod", func() {
-		Payload(ExampleType)
+		Payload(ArrayOf(ExampleType))
 		Result(ArrayOf(ExampleType))
 		HTTP(func() {
 			POST("/example")

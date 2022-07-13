@@ -30,11 +30,28 @@ func UsageCommands() string {
 
 // UsageExamples produces an example of a valid invocation of the CLI tool.
 func UsageExamples() string {
-	return os.Args[0] + ` foo-service foo-method --body '{
-      "External": {
-         "Field": "Eos quisquam et nisi molestiae."
+	return os.Args[0] + ` foo-service foo-method --body '[
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
       }
-   }'` + "\n" +
+   ]'` + "\n" +
 		""
 }
 
@@ -152,10 +169,27 @@ FooMethod implements FooMethod.
     -body JSON: 
 
 Example:
-    %[1]s foo-service foo-method --body '{
-      "External": {
-         "Field": "Eos quisquam et nisi molestiae."
+    %[1]s foo-service foo-method --body '[
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
+      },
+      {
+         "External": {
+            "Field": "Nisi molestiae suscipit voluptates voluptates."
+         }
       }
-   }'
+   ]'
 `, os.Args[0])
 }
