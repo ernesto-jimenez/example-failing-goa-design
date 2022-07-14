@@ -10,8 +10,6 @@ package fooservice
 
 import (
 	"context"
-
-	types "github.com/ernesto-jimenez/example-failing-goa-design/api/gen/types"
 )
 
 // Service is the FooService service interface.
@@ -31,11 +29,21 @@ const ServiceName = "FooService"
 var MethodNames = [1]string{"FooMethod"}
 
 type ExampleType struct {
-	External *types.ExternalType
+	External       *ExternalType
+	SecondExternal *SecondExternalType
+}
+
+type ExternalType struct {
+	Field string
 }
 
 // FooMethodPayload is the payload type of the FooService service FooMethod
 // method.
 type FooMethodPayload struct {
-	External *types.ExternalType
+	External       *ExternalType
+	SecondExternal *SecondExternalType
+}
+
+type SecondExternalType struct {
+	Field *string
 }

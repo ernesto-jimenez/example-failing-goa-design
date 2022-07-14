@@ -40,18 +40,22 @@ definitions:
         properties:
             External:
                 $ref: '#/definitions/ExternalTypeResponse'
+            SecondExternal:
+                $ref: '#/definitions/SecondExternalTypeResponse'
         example:
             External:
-                Field: Voluptates voluptates quia non.
+                Field: Similique facilis corrupti distinctio ut.
+            SecondExternal:
+                Field: Facilis exercitationem qui.
     ExternalTypeRequestBody:
         title: ExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Facilis exercitationem qui.
+                example: Expedita dolor.
         example:
-            Field: Praesentium sed.
+            Field: Tempore a ut nisi consequuntur.
         required:
             - Field
     ExternalTypeResponse:
@@ -60,9 +64,9 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Ut mollitia id similique.
+                example: Non omnis.
         example:
-            Field: Corrupti distinctio ut.
+            Field: Numquam delectus ut excepturi dolorem autem.
         required:
             - Field
     FooServiceFooMethodRequestBody:
@@ -71,6 +75,28 @@ definitions:
         properties:
             External:
                 $ref: '#/definitions/ExternalTypeRequestBody'
+            SecondExternal:
+                $ref: '#/definitions/SecondExternalTypeRequestBody'
         example:
             External:
-                Field: Eos quisquam et nisi molestiae.
+                Field: Quia non aspernatur.
+            SecondExternal:
+                Field: Aut quasi ut mollitia.
+    SecondExternalTypeRequestBody:
+        title: SecondExternalTypeRequestBody
+        type: object
+        properties:
+            Field:
+                type: string
+                example: Quam doloremque molestias nihil id sunt illum.
+        example:
+            Field: Rerum aut atque animi.
+    SecondExternalTypeResponse:
+        title: SecondExternalTypeResponse
+        type: object
+        properties:
+            Field:
+                type: string
+                example: Voluptatem et blanditiis tempora.
+        example:
+            Field: Laborum illo distinctio rerum quisquam.

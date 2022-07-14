@@ -23,12 +23,15 @@ func BuildFooMethodPayload(fooServiceFooMethodBody string) (*fooservice.FooMetho
 	{
 		err = json.Unmarshal([]byte(fooServiceFooMethodBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"External\": {\n         \"Field\": \"Eos quisquam et nisi molestiae.\"\n      }\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"External\": {\n         \"Field\": \"Quia non aspernatur.\"\n      },\n      \"SecondExternal\": {\n         \"Field\": \"Aut quasi ut mollitia.\"\n      }\n   }'")
 		}
 	}
 	v := &fooservice.FooMethodPayload{}
 	if body.External != nil {
-		v.External = marshalTypesExternalTypeRequestBodyToTypesExternalType(body.External)
+		v.External = marshalExternalTypeRequestBodyToFooserviceExternalType(body.External)
+	}
+	if body.SecondExternal != nil {
+		v.SecondExternal = marshalSecondExternalTypeRequestBodyToFooserviceSecondExternalType(body.SecondExternal)
 	}
 
 	return v, nil

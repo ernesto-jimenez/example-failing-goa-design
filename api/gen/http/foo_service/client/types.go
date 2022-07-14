@@ -16,7 +16,8 @@ import (
 // FooMethodRequestBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP request body.
 type FooMethodRequestBody struct {
-	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	External       *ExternalTypeRequestBody       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal *SecondExternalTypeRequestBody `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
 }
 
 // FooMethodResponseBody is the type of the "FooService" service "FooMethod"
@@ -28,13 +29,24 @@ type ExternalTypeRequestBody struct {
 	Field string `form:"Field" json:"Field" xml:"Field"`
 }
 
+// SecondExternalTypeRequestBody is used to define fields on request body types.
+type SecondExternalTypeRequestBody struct {
+	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
+}
+
 // ExampleTypeResponse is used to define fields on response body types.
 type ExampleTypeResponse struct {
-	External *ExternalTypeResponse `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	External       *ExternalTypeResponse       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal *SecondExternalTypeResponse `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
 }
 
 // ExternalTypeResponse is used to define fields on response body types.
 type ExternalTypeResponse struct {
+	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
+}
+
+// SecondExternalTypeResponse is used to define fields on response body types.
+type SecondExternalTypeResponse struct {
 	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
 }
 
@@ -43,7 +55,10 @@ type ExternalTypeResponse struct {
 func NewFooMethodRequestBody(p *fooservice.FooMethodPayload) *FooMethodRequestBody {
 	body := &FooMethodRequestBody{}
 	if p.External != nil {
-		body.External = marshalTypesExternalTypeToTypesExternalTypeRequestBody(p.External)
+		body.External = marshalFooserviceExternalTypeToExternalTypeRequestBody(p.External)
+	}
+	if p.SecondExternal != nil {
+		body.SecondExternal = marshalFooserviceSecondExternalTypeToSecondExternalTypeRequestBody(p.SecondExternal)
 	}
 	return body
 }

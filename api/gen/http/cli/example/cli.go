@@ -32,7 +32,10 @@ func UsageCommands() string {
 func UsageExamples() string {
 	return os.Args[0] + ` foo-service foo-method --body '{
       "External": {
-         "Field": "Eos quisquam et nisi molestiae."
+         "Field": "Quia non aspernatur."
+      },
+      "SecondExternal": {
+         "Field": "Aut quasi ut mollitia."
       }
    }'` + "\n" +
 		""
@@ -154,7 +157,10 @@ FooMethod implements FooMethod.
 Example:
     %[1]s foo-service foo-method --body '{
       "External": {
-         "Field": "Eos quisquam et nisi molestiae."
+         "Field": "Quia non aspernatur."
+      },
+      "SecondExternal": {
+         "Field": "Aut quasi ut mollitia."
       }
    }'
 `, os.Args[0])

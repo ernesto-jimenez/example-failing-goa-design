@@ -16,7 +16,8 @@ import (
 // FooMethodRequestBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP request body.
 type FooMethodRequestBody struct {
-	External *ExternalTypeRequestBody `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	External       *ExternalTypeRequestBody       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal *SecondExternalTypeRequestBody `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
 }
 
 // FooMethodResponseBody is the type of the "FooService" service "FooMethod"
@@ -25,7 +26,8 @@ type FooMethodResponseBody []*ExampleTypeResponse
 
 // ExampleTypeResponse is used to define fields on response body types.
 type ExampleTypeResponse struct {
-	External *ExternalTypeResponse `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	External       *ExternalTypeResponse       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal *SecondExternalTypeResponse `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
 }
 
 // ExternalTypeResponse is used to define fields on response body types.
@@ -33,8 +35,18 @@ type ExternalTypeResponse struct {
 	Field string `form:"Field" json:"Field" xml:"Field"`
 }
 
+// SecondExternalTypeResponse is used to define fields on response body types.
+type SecondExternalTypeResponse struct {
+	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
+}
+
 // ExternalTypeRequestBody is used to define fields on request body types.
 type ExternalTypeRequestBody struct {
+	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
+}
+
+// SecondExternalTypeRequestBody is used to define fields on request body types.
+type SecondExternalTypeRequestBody struct {
 	Field *string `form:"Field,omitempty" json:"Field,omitempty" xml:"Field,omitempty"`
 }
 
@@ -52,7 +64,10 @@ func NewFooMethodResponseBody(res []*fooservice.ExampleType) FooMethodResponseBo
 func NewFooMethodPayload(body *FooMethodRequestBody) *fooservice.FooMethodPayload {
 	v := &fooservice.FooMethodPayload{}
 	if body.External != nil {
-		v.External = unmarshalTypesExternalTypeRequestBodyToTypesExternalType(body.External)
+		v.External = unmarshalExternalTypeRequestBodyToFooserviceExternalType(body.External)
+	}
+	if body.SecondExternal != nil {
+		v.SecondExternal = unmarshalSecondExternalTypeRequestBodyToFooserviceSecondExternalType(body.SecondExternal)
 	}
 
 	return v
@@ -62,7 +77,7 @@ func NewFooMethodPayload(body *FooMethodRequestBody) *fooservice.FooMethodPayloa
 // FooMethodRequestBody
 func ValidateFooMethodRequestBody(body *FooMethodRequestBody) (err error) {
 	if body.External != nil {
-		if err2 := ValidateTypesExternalTypeRequestBody(body.External); err2 != nil {
+		if err2 := ValidateExternalTypeRequestBody(body.External); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
 	}

@@ -14,7 +14,6 @@ import (
 	"net/http"
 
 	fooservice "github.com/ernesto-jimenez/example-failing-goa-design/api/gen/foo_service"
-	types "github.com/ernesto-jimenez/example-failing-goa-design/api/gen/types"
 	goahttp "goa.design/goa/v3/http"
 	goa "goa.design/goa/v3/pkg"
 )
@@ -56,14 +55,28 @@ func DecodeFooMethodRequest(mux goahttp.Muxer, decoder func(*http.Request) goaht
 	}
 }
 
-// unmarshalTypesExternalTypeRequestBodyToTypesExternalType builds a value of
-// type *types.ExternalType from a value of type *types.ExternalTypeRequestBody.
-func unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalTypeRequestBody) *types.ExternalType {
+// unmarshalExternalTypeRequestBodyToFooserviceExternalType builds a value of
+// type *fooservice.ExternalType from a value of type *ExternalTypeRequestBody.
+func unmarshalExternalTypeRequestBodyToFooserviceExternalType(v *ExternalTypeRequestBody) *fooservice.ExternalType {
 	if v == nil {
 		return nil
 	}
-	res := &types.ExternalType{
+	res := &fooservice.ExternalType{
 		Field: *v.Field,
+	}
+
+	return res
+}
+
+// unmarshalSecondExternalTypeRequestBodyToFooserviceSecondExternalType builds
+// a value of type *fooservice.SecondExternalType from a value of type
+// *SecondExternalTypeRequestBody.
+func unmarshalSecondExternalTypeRequestBodyToFooserviceSecondExternalType(v *SecondExternalTypeRequestBody) *fooservice.SecondExternalType {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.SecondExternalType{
+		Field: v.Field,
 	}
 
 	return res
@@ -74,19 +87,36 @@ func unmarshalTypesExternalTypeRequestBodyToTypesExternalType(v *types.ExternalT
 func marshalFooserviceExampleTypeToExampleTypeResponse(v *fooservice.ExampleType) *ExampleTypeResponse {
 	res := &ExampleTypeResponse{}
 	if v.External != nil {
-		res.External = marshalTypesExternalTypeToExternalTypeResponse(v.External)
+		res.External = marshalFooserviceExternalTypeToExternalTypeResponse(v.External)
+	}
+	if v.SecondExternal != nil {
+		res.SecondExternal = marshalFooserviceSecondExternalTypeToSecondExternalTypeResponse(v.SecondExternal)
 	}
 
 	return res
 }
 
-// marshalTypesExternalTypeToExternalTypeResponse builds a value of type
-// *ExternalTypeResponse from a value of type *types.ExternalType.
-func marshalTypesExternalTypeToExternalTypeResponse(v *types.ExternalType) *ExternalTypeResponse {
+// marshalFooserviceExternalTypeToExternalTypeResponse builds a value of type
+// *ExternalTypeResponse from a value of type *fooservice.ExternalType.
+func marshalFooserviceExternalTypeToExternalTypeResponse(v *fooservice.ExternalType) *ExternalTypeResponse {
 	if v == nil {
 		return nil
 	}
 	res := &ExternalTypeResponse{
+		Field: v.Field,
+	}
+
+	return res
+}
+
+// marshalFooserviceSecondExternalTypeToSecondExternalTypeResponse builds a
+// value of type *SecondExternalTypeResponse from a value of type
+// *fooservice.SecondExternalType.
+func marshalFooserviceSecondExternalTypeToSecondExternalTypeResponse(v *fooservice.SecondExternalType) *SecondExternalTypeResponse {
+	if v == nil {
+		return nil
+	}
+	res := &SecondExternalTypeResponse{
 		Field: v.Field,
 	}
 

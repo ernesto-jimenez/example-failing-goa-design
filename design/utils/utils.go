@@ -9,3 +9,8 @@ var ExternalType = dsl.Type("ExternalType", func() {
 	dsl.Attribute("Field", dsl.String)
 	dsl.Required("Field")
 })
+
+var SecondExternalType = dsl.Type("SecondExternalType", func() {
+	dsl.Meta("struct:pkg:path", "types")
+	dsl.Attribute("Field", dsl.String)
+})

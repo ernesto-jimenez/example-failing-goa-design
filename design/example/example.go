@@ -11,6 +11,7 @@ var _ = API("Example", func() {
 
 var ExampleType = Type("ExampleType", func() {
 	Attribute("External", utils.ExternalType)
+	Attribute("SecondExternal", utils.SecondExternalType)
 })
 
 var _ = Service("FooService", func() {
