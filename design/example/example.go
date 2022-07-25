@@ -20,8 +20,22 @@ var Extension = Type("Extension", func() {
 
 var ExampleType = Type("ExampleType", func() {
 	Extend(Extension)
+	Attribute("FieldWithExtension", FieldWithExtension)
 	Attribute("External", utils.ExternalType)
 	Attribute("SecondExternal", utils.SecondExternalType)
+})
+
+var FieldWithExtension = Type("FieldWithExtension", func() {
+	Extend(ParticularField)
+})
+
+var ParticularField = Type("ParticularField", func() {
+	Attribute("BarField", Bar)
+})
+
+var Bar = Type("Bar", func() {
+	Attribute("Bar", UInt)
+	Required("Bar")
 })
 
 var _ = Service("FooService", func() {

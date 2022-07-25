@@ -16,15 +16,25 @@ import (
 // FooMethodRequestBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP request body.
 type FooMethodRequestBody struct {
-	External       *ExternalTypeRequestBody       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
-	SecondExternal *SecondExternalTypeRequestBody `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
-	DateField      string                         `form:"DateField" json:"DateField" xml:"DateField"`
-	UintField      uint                           `form:"UintField" json:"UintField" xml:"UintField"`
+	FieldWithExtension *FieldWithExtensionRequestBody `form:"FieldWithExtension,omitempty" json:"FieldWithExtension,omitempty" xml:"FieldWithExtension,omitempty"`
+	External           *ExternalTypeRequestBody       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal     *SecondExternalTypeRequestBody `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
+	DateField          string                         `form:"DateField" json:"DateField" xml:"DateField"`
 }
 
 // FooMethodResponseBody is the type of the "FooService" service "FooMethod"
 // endpoint HTTP response body.
 type FooMethodResponseBody []*ExampleTypeResponse
+
+// FieldWithExtensionRequestBody is used to define fields on request body types.
+type FieldWithExtensionRequestBody struct {
+	BarField *Bar `form:"BarField,omitempty" json:"BarField,omitempty" xml:"BarField,omitempty"`
+}
+
+// Bar is used to define fields on request body types.
+type Bar struct {
+	Bar uint `form:"Bar" json:"Bar" xml:"Bar"`
+}
 
 // ExternalTypeRequestBody is used to define fields on request body types.
 type ExternalTypeRequestBody struct {
@@ -38,10 +48,15 @@ type SecondExternalTypeRequestBody struct {
 
 // ExampleTypeResponse is used to define fields on response body types.
 type ExampleTypeResponse struct {
-	External       *ExternalTypeResponse       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
-	SecondExternal *SecondExternalTypeResponse `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
-	DateField      *string                     `form:"DateField,omitempty" json:"DateField,omitempty" xml:"DateField,omitempty"`
-	UintField      *uint                       `form:"UintField,omitempty" json:"UintField,omitempty" xml:"UintField,omitempty"`
+	FieldWithExtension *FieldWithExtensionResponse `form:"FieldWithExtension,omitempty" json:"FieldWithExtension,omitempty" xml:"FieldWithExtension,omitempty"`
+	External           *ExternalTypeResponse       `form:"External,omitempty" json:"External,omitempty" xml:"External,omitempty"`
+	SecondExternal     *SecondExternalTypeResponse `form:"SecondExternal,omitempty" json:"SecondExternal,omitempty" xml:"SecondExternal,omitempty"`
+	DateField          *string                     `form:"DateField,omitempty" json:"DateField,omitempty" xml:"DateField,omitempty"`
+}
+
+// FieldWithExtensionResponse is used to define fields on response body types.
+type FieldWithExtensionResponse struct {
+	BarField *Bar `form:"BarField,omitempty" json:"BarField,omitempty" xml:"BarField,omitempty"`
 }
 
 // ExternalTypeResponse is used to define fields on response body types.
@@ -59,7 +74,9 @@ type SecondExternalTypeResponse struct {
 func NewFooMethodRequestBody(p *fooservice.FooMethodPayload) *FooMethodRequestBody {
 	body := &FooMethodRequestBody{
 		DateField: string(p.DateField),
-		UintField: p.UintField,
+	}
+	if p.FieldWithExtension != nil {
+		body.FieldWithExtension = marshalFooserviceFieldWithExtensionToFieldWithExtensionRequestBody(p.FieldWithExtension)
 	}
 	if p.External != nil {
 		body.External = marshalTypesExternalTypeToExternalTypeRequestBody(p.External)
@@ -87,8 +104,10 @@ func ValidateExampleTypeResponse(body *ExampleTypeResponse) (err error) {
 	if body.DateField == nil {
 		err = goa.MergeErrors(err, goa.MissingFieldError("DateField", "body"))
 	}
-	if body.UintField == nil {
-		err = goa.MergeErrors(err, goa.MissingFieldError("UintField", "body"))
+	if body.FieldWithExtension != nil {
+		if err2 := ValidateFieldWithExtensionResponse(body.FieldWithExtension); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
 	}
 	if body.External != nil {
 		if err2 := ValidateExternalTypeResponse(body.External); err2 != nil {
@@ -97,6 +116,17 @@ func ValidateExampleTypeResponse(body *ExampleTypeResponse) (err error) {
 	}
 	if body.DateField != nil {
 		err = goa.MergeErrors(err, goa.ValidateFormat("body.DateField", *body.DateField, goa.FormatDateTime))
+	}
+	return
+}
+
+// ValidateFieldWithExtensionResponse runs the validations defined on
+// FieldWithExtensionResponse
+func ValidateFieldWithExtensionResponse(body *FieldWithExtensionResponse) (err error) {
+	if body.BarField != nil {
+		if err2 := ValidateBar(body.BarField); err2 != nil {
+			err = goa.MergeErrors(err, err2)
+		}
 	}
 	return
 }

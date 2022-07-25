@@ -56,6 +56,34 @@ func DecodeFooMethodRequest(mux goahttp.Muxer, decoder func(*http.Request) goaht
 	}
 }
 
+// unmarshalFieldWithExtensionRequestBodyToFooserviceFieldWithExtension builds
+// a value of type *fooservice.FieldWithExtension from a value of type
+// *FieldWithExtensionRequestBody.
+func unmarshalFieldWithExtensionRequestBodyToFooserviceFieldWithExtension(v *FieldWithExtensionRequestBody) *fooservice.FieldWithExtension {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.FieldWithExtension{}
+	if v.BarField != nil {
+		res.BarField = unmarshalBarToFooserviceBar(v.BarField)
+	}
+
+	return res
+}
+
+// unmarshalBarToFooserviceBar builds a value of type *fooservice.Bar from a
+// value of type *Bar.
+func unmarshalBarToFooserviceBar(v *Bar) *fooservice.Bar {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.Bar{
+		Bar: *v.Bar,
+	}
+
+	return res
+}
+
 // unmarshalExternalTypeRequestBodyToTypesExternalType builds a value of type
 // *types.ExternalType from a value of type *ExternalTypeRequestBody.
 func unmarshalExternalTypeRequestBodyToTypesExternalType(v *ExternalTypeRequestBody) *types.ExternalType {
@@ -88,13 +116,43 @@ func unmarshalSecondExternalTypeRequestBodyToTypesSecondExternalType(v *SecondEx
 func marshalFooserviceExampleTypeToExampleTypeResponse(v *fooservice.ExampleType) *ExampleTypeResponse {
 	res := &ExampleTypeResponse{
 		DateField: v.DateField,
-		UintField: v.UintField,
+	}
+	if v.FieldWithExtension != nil {
+		res.FieldWithExtension = marshalFooserviceFieldWithExtensionToFieldWithExtensionResponse(v.FieldWithExtension)
 	}
 	if v.External != nil {
 		res.External = marshalTypesExternalTypeToExternalTypeResponse(v.External)
 	}
 	if v.SecondExternal != nil {
 		res.SecondExternal = marshalTypesSecondExternalTypeToSecondExternalTypeResponse(v.SecondExternal)
+	}
+
+	return res
+}
+
+// marshalFooserviceFieldWithExtensionToFieldWithExtensionResponse builds a
+// value of type *FieldWithExtensionResponse from a value of type
+// *fooservice.FieldWithExtension.
+func marshalFooserviceFieldWithExtensionToFieldWithExtensionResponse(v *fooservice.FieldWithExtension) *FieldWithExtensionResponse {
+	if v == nil {
+		return nil
+	}
+	res := &FieldWithExtensionResponse{}
+	if v.BarField != nil {
+		res.BarField = marshalFooserviceBarToBar(v.BarField)
+	}
+
+	return res
+}
+
+// marshalFooserviceBarToBar builds a value of type *Bar from a value of type
+// *fooservice.Bar.
+func marshalFooserviceBarToBar(v *fooservice.Bar) *Bar {
+	if v == nil {
+		return nil
+	}
+	res := &Bar{
+		Bar: v.Bar,
 	}
 
 	return res

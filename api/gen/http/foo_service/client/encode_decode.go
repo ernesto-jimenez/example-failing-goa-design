@@ -98,6 +98,34 @@ func DecodeFooMethodResponse(decoder func(*http.Response) goahttp.Decoder, resto
 	}
 }
 
+// marshalFooserviceFieldWithExtensionToFieldWithExtensionRequestBody builds a
+// value of type *FieldWithExtensionRequestBody from a value of type
+// *fooservice.FieldWithExtension.
+func marshalFooserviceFieldWithExtensionToFieldWithExtensionRequestBody(v *fooservice.FieldWithExtension) *FieldWithExtensionRequestBody {
+	if v == nil {
+		return nil
+	}
+	res := &FieldWithExtensionRequestBody{}
+	if v.BarField != nil {
+		res.BarField = marshalFooserviceBarToBar(v.BarField)
+	}
+
+	return res
+}
+
+// marshalFooserviceBarToBar builds a value of type *Bar from a value of type
+// *fooservice.Bar.
+func marshalFooserviceBarToBar(v *fooservice.Bar) *Bar {
+	if v == nil {
+		return nil
+	}
+	res := &Bar{
+		Bar: v.Bar,
+	}
+
+	return res
+}
+
 // marshalTypesExternalTypeToExternalTypeRequestBody builds a value of type
 // *ExternalTypeRequestBody from a value of type *types.ExternalType.
 func marshalTypesExternalTypeToExternalTypeRequestBody(v *types.ExternalType) *ExternalTypeRequestBody {
@@ -120,6 +148,34 @@ func marshalTypesSecondExternalTypeToSecondExternalTypeRequestBody(v *types.Seco
 	}
 	res := &SecondExternalTypeRequestBody{
 		Field: v.Field,
+	}
+
+	return res
+}
+
+// marshalFieldWithExtensionRequestBodyToFooserviceFieldWithExtension builds a
+// value of type *fooservice.FieldWithExtension from a value of type
+// *FieldWithExtensionRequestBody.
+func marshalFieldWithExtensionRequestBodyToFooserviceFieldWithExtension(v *FieldWithExtensionRequestBody) *fooservice.FieldWithExtension {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.FieldWithExtension{}
+	if v.BarField != nil {
+		res.BarField = marshalBarToFooserviceBar(v.BarField)
+	}
+
+	return res
+}
+
+// marshalBarToFooserviceBar builds a value of type *fooservice.Bar from a
+// value of type *Bar.
+func marshalBarToFooserviceBar(v *Bar) *fooservice.Bar {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.Bar{
+		Bar: v.Bar,
 	}
 
 	return res
@@ -157,13 +213,43 @@ func marshalSecondExternalTypeRequestBodyToTypesSecondExternalType(v *SecondExte
 func unmarshalExampleTypeResponseToFooserviceExampleType(v *ExampleTypeResponse) *fooservice.ExampleType {
 	res := &fooservice.ExampleType{
 		DateField: *v.DateField,
-		UintField: *v.UintField,
+	}
+	if v.FieldWithExtension != nil {
+		res.FieldWithExtension = unmarshalFieldWithExtensionResponseToFooserviceFieldWithExtension(v.FieldWithExtension)
 	}
 	if v.External != nil {
 		res.External = unmarshalExternalTypeResponseToTypesExternalType(v.External)
 	}
 	if v.SecondExternal != nil {
 		res.SecondExternal = unmarshalSecondExternalTypeResponseToTypesSecondExternalType(v.SecondExternal)
+	}
+
+	return res
+}
+
+// unmarshalFieldWithExtensionResponseToFooserviceFieldWithExtension builds a
+// value of type *fooservice.FieldWithExtension from a value of type
+// *FieldWithExtensionResponse.
+func unmarshalFieldWithExtensionResponseToFooserviceFieldWithExtension(v *FieldWithExtensionResponse) *fooservice.FieldWithExtension {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.FieldWithExtension{}
+	if v.BarField != nil {
+		res.BarField = unmarshalBarToFooserviceBar(v.BarField)
+	}
+
+	return res
+}
+
+// unmarshalBarToFooserviceBar builds a value of type *fooservice.Bar from a
+// value of type *Bar.
+func unmarshalBarToFooserviceBar(v *Bar) *fooservice.Bar {
+	if v == nil {
+		return nil
+	}
+	res := &fooservice.Bar{
+		Bar: *v.Bar,
 	}
 
 	return res

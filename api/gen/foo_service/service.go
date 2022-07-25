@@ -30,20 +30,28 @@ const ServiceName = "FooService"
 // MethodKey key.
 var MethodNames = [1]string{"FooMethod"}
 
+type Bar struct {
+	Bar uint
+}
+
 type DateTime string
 
 type ExampleType struct {
-	External       *types.ExternalType
-	SecondExternal *types.SecondExternalType
-	DateField      DateTime
-	UintField      uint
+	FieldWithExtension *FieldWithExtension
+	External           *types.ExternalType
+	SecondExternal     *types.SecondExternalType
+	DateField          DateTime
+}
+
+type FieldWithExtension struct {
+	BarField *Bar
 }
 
 // FooMethodPayload is the payload type of the FooService service FooMethod
 // method.
 type FooMethodPayload struct {
-	External       *types.ExternalType
-	SecondExternal *types.SecondExternalType
-	DateField      DateTime
-	UintField      uint
+	FieldWithExtension *FieldWithExtension
+	External           *types.ExternalType
+	SecondExternal     *types.SecondExternalType
+	DateField          DateTime
 }

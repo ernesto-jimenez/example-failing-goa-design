@@ -35,10 +35,14 @@ func UsageExamples() string {
       "External": {
          "Field": "Ut mollitia id similique."
       },
+      "FieldWithExtension": {
+         "BarField": {
+            "Bar": 12728010016061705013
+         }
+      },
       "SecondExternal": {
          "Field": "Corrupti distinctio ut."
-      },
-      "UintField": 10644113808551616344
+      }
    }'` + "\n" +
 		""
 }
@@ -162,10 +166,14 @@ Example:
       "External": {
          "Field": "Ut mollitia id similique."
       },
+      "FieldWithExtension": {
+         "BarField": {
+            "Bar": 12728010016061705013
+         }
+      },
       "SecondExternal": {
          "Field": "Corrupti distinctio ut."
-      },
-      "UintField": 10644113808551616344
+      }
    }'
 `, os.Args[0])
 }

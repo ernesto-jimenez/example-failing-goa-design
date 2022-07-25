@@ -26,7 +26,6 @@ paths:
                     $ref: '#/definitions/FooServiceFooMethodRequestBody'
                     required:
                         - DateField
-                        - UintField
             responses:
                 "200":
                     description: OK response.
@@ -37,41 +36,52 @@ paths:
             schemes:
                 - http
 definitions:
+    Bar:
+        title: Bar
+        type: object
+        properties:
+            Bar:
+                type: integer
+                example: 2959201625900554196
+                format: int64
+        example:
+            Bar: 6075347245146661455
+        required:
+            - Bar
     ExampleTypeResponse:
         title: ExampleTypeResponse
         type: object
         properties:
             DateField:
                 type: string
-                example: "2013-10-12T18:59:27Z"
+                example: "1981-05-05T04:08:06Z"
                 format: date-time
             External:
                 $ref: '#/definitions/ExternalTypeResponse'
+            FieldWithExtension:
+                $ref: '#/definitions/FieldWithExtensionResponse'
             SecondExternal:
                 $ref: '#/definitions/SecondExternalTypeResponse'
-            UintField:
-                type: integer
-                example: 15605647191505478842
-                format: int64
         example:
-            DateField: "1997-02-04T09:23:47Z"
+            DateField: "1989-05-01T13:46:14Z"
             External:
-                Field: Rerum aut atque animi.
+                Field: Suscipit rerum aut atque animi ut et.
+            FieldWithExtension:
+                BarField:
+                    Bar: 12728010016061705013
             SecondExternal:
-                Field: Et quisquam quia ab quia rerum.
-            UintField: 15935421087944460847
+                Field: Quia ab quia rerum.
         required:
             - DateField
-            - UintField
     ExternalTypeRequestBody:
         title: ExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Occaecati quia tempore quo.
+                example: Nihil qui aut.
         example:
-            Field: Aut et ipsum.
+            Field: Distinctio eligendi atque vel omnis molestiae occaecati.
         required:
             - Field
     ExternalTypeResponse:
@@ -80,52 +90,69 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Iste iusto dolores asperiores fugit.
+                example: Iusto dolores.
         example:
-            Field: Sed eligendi voluptatibus aut qui.
+            Field: Fugit autem sed.
         required:
             - Field
+    FieldWithExtensionRequestBody:
+        title: FieldWithExtensionRequestBody
+        type: object
+        properties:
+            BarField:
+                $ref: '#/definitions/Bar'
+        example:
+            BarField:
+                Bar: 12728010016061705013
+    FieldWithExtensionResponse:
+        title: FieldWithExtensionResponse
+        type: object
+        properties:
+            BarField:
+                $ref: '#/definitions/Bar'
+        example:
+            BarField:
+                Bar: 12728010016061705013
     FooServiceFooMethodRequestBody:
         title: FooServiceFooMethodRequestBody
         type: object
         properties:
             DateField:
                 type: string
-                example: "1992-08-30T18:05:13Z"
+                example: "2001-10-05T16:36:22Z"
                 format: date-time
             External:
                 $ref: '#/definitions/ExternalTypeRequestBody'
+            FieldWithExtension:
+                $ref: '#/definitions/FieldWithExtensionRequestBody'
             SecondExternal:
                 $ref: '#/definitions/SecondExternalTypeRequestBody'
-            UintField:
-                type: integer
-                example: 254877934337876168
-                format: int64
         example:
-            DateField: "1977-08-30T18:50:51Z"
+            DateField: "2009-07-20T14:20:40Z"
             External:
                 Field: Ut mollitia id similique.
+            FieldWithExtension:
+                BarField:
+                    Bar: 12728010016061705013
             SecondExternal:
                 Field: Corrupti distinctio ut.
-            UintField: 12174973568669703396
         required:
             - DateField
-            - UintField
     SecondExternalTypeRequestBody:
         title: SecondExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Ea laboriosam recusandae sit pariatur.
+                example: Tempore quo quaerat aut et.
         example:
-            Field: Eius eum.
+            Field: Est ea.
     SecondExternalTypeResponse:
         title: SecondExternalTypeResponse
         type: object
         properties:
             Field:
                 type: string
-                example: Similique aut qui numquam veritatis repudiandae.
+                example: Voluptatibus aut qui.
         example:
-            Field: Ullam nisi et omnis nihil natus.
+            Field: Similique aut qui numquam veritatis repudiandae.

@@ -24,7 +24,7 @@ func BuildFooMethodPayload(fooServiceFooMethodBody string) (*fooservice.FooMetho
 	{
 		err = json.Unmarshal([]byte(fooServiceFooMethodBody), &body)
 		if err != nil {
-			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"DateField\": \"2009-08-25T06:53:12Z\",\n      \"External\": {\n         \"Field\": \"Ut mollitia id similique.\"\n      },\n      \"SecondExternal\": {\n         \"Field\": \"Corrupti distinctio ut.\"\n      },\n      \"UintField\": 10644113808551616344\n   }'")
+			return nil, fmt.Errorf("invalid JSON for body, \nerror: %s, \nexample of valid JSON:\n%s", err, "'{\n      \"DateField\": \"2009-08-25T06:53:12Z\",\n      \"External\": {\n         \"Field\": \"Ut mollitia id similique.\"\n      },\n      \"FieldWithExtension\": {\n         \"BarField\": {\n            \"Bar\": 12728010016061705013\n         }\n      },\n      \"SecondExternal\": {\n         \"Field\": \"Corrupti distinctio ut.\"\n      }\n   }'")
 		}
 		err = goa.MergeErrors(err, goa.ValidateFormat("body.DateField", body.DateField, goa.FormatDateTime))
 
@@ -34,7 +34,9 @@ func BuildFooMethodPayload(fooServiceFooMethodBody string) (*fooservice.FooMetho
 	}
 	v := &fooservice.FooMethodPayload{
 		DateField: fooservice.DateTime(body.DateField),
-		UintField: body.UintField,
+	}
+	if body.FieldWithExtension != nil {
+		v.FieldWithExtension = marshalFieldWithExtensionRequestBodyToFooserviceFieldWithExtension(body.FieldWithExtension)
 	}
 	if body.External != nil {
 		v.External = marshalExternalTypeRequestBodyToTypesExternalType(body.External)
