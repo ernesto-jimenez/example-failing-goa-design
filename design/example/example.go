@@ -9,7 +9,17 @@ var _ = API("Example", func() {
 	HTTP()
 })
 
+var DateTime = Type("DateTime", String, func() {
+	Format(FormatDateTime)
+})
+
+var Extension = Type("Extension", func() {
+	Attribute("DateField", DateTime)
+	Required("DateField")
+})
+
 var ExampleType = Type("ExampleType", func() {
+	Extend(Extension)
 	Attribute("External", utils.ExternalType)
 	Attribute("SecondExternal", utils.SecondExternalType)
 })

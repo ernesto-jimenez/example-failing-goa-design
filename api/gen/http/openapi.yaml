@@ -24,6 +24,9 @@ paths:
                   required: true
                   schema:
                     $ref: '#/definitions/FooServiceFooMethodRequestBody'
+                    required:
+                        - DateField
+                        - UintField
             responses:
                 "200":
                     description: OK response.
@@ -38,24 +41,37 @@ definitions:
         title: ExampleTypeResponse
         type: object
         properties:
+            DateField:
+                type: string
+                example: "2013-10-12T18:59:27Z"
+                format: date-time
             External:
                 $ref: '#/definitions/ExternalTypeResponse'
             SecondExternal:
                 $ref: '#/definitions/SecondExternalTypeResponse'
+            UintField:
+                type: integer
+                example: 15605647191505478842
+                format: int64
         example:
+            DateField: "1997-02-04T09:23:47Z"
             External:
-                Field: Similique facilis corrupti distinctio ut.
+                Field: Rerum aut atque animi.
             SecondExternal:
-                Field: Facilis exercitationem qui.
+                Field: Et quisquam quia ab quia rerum.
+            UintField: 15935421087944460847
+        required:
+            - DateField
+            - UintField
     ExternalTypeRequestBody:
         title: ExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Expedita dolor.
+                example: Occaecati quia tempore quo.
         example:
-            Field: Tempore a ut nisi consequuntur.
+            Field: Aut et ipsum.
         required:
             - Field
     ExternalTypeResponse:
@@ -64,39 +80,52 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Non omnis.
+                example: Iste iusto dolores asperiores fugit.
         example:
-            Field: Numquam delectus ut excepturi dolorem autem.
+            Field: Sed eligendi voluptatibus aut qui.
         required:
             - Field
     FooServiceFooMethodRequestBody:
         title: FooServiceFooMethodRequestBody
         type: object
         properties:
+            DateField:
+                type: string
+                example: "1992-08-30T18:05:13Z"
+                format: date-time
             External:
                 $ref: '#/definitions/ExternalTypeRequestBody'
             SecondExternal:
                 $ref: '#/definitions/SecondExternalTypeRequestBody'
+            UintField:
+                type: integer
+                example: 254877934337876168
+                format: int64
         example:
+            DateField: "1977-08-30T18:50:51Z"
             External:
-                Field: Quia non aspernatur.
+                Field: Ut mollitia id similique.
             SecondExternal:
-                Field: Aut quasi ut mollitia.
+                Field: Corrupti distinctio ut.
+            UintField: 12174973568669703396
+        required:
+            - DateField
+            - UintField
     SecondExternalTypeRequestBody:
         title: SecondExternalTypeRequestBody
         type: object
         properties:
             Field:
                 type: string
-                example: Quam doloremque molestias nihil id sunt illum.
+                example: Ea laboriosam recusandae sit pariatur.
         example:
-            Field: Rerum aut atque animi.
+            Field: Eius eum.
     SecondExternalTypeResponse:
         title: SecondExternalTypeResponse
         type: object
         properties:
             Field:
                 type: string
-                example: Voluptatem et blanditiis tempora.
+                example: Similique aut qui numquam veritatis repudiandae.
         example:
-            Field: Laborum illo distinctio rerum quisquam.
+            Field: Ullam nisi et omnis nihil natus.
