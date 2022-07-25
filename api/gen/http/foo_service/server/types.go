@@ -36,11 +36,11 @@ type ExampleTypeResponse struct {
 
 // FieldWithExtensionResponse is used to define fields on response body types.
 type FieldWithExtensionResponse struct {
-	BarField *Bar `form:"BarField,omitempty" json:"BarField,omitempty" xml:"BarField,omitempty"`
+	BarField *BarResponse `form:"BarField,omitempty" json:"BarField,omitempty" xml:"BarField,omitempty"`
 }
 
-// Bar is used to define fields on response body types.
-type Bar struct {
+// BarResponse is used to define fields on response body types.
+type BarResponse struct {
 	Bar uint `form:"Bar" json:"Bar" xml:"Bar"`
 }
 
@@ -57,6 +57,11 @@ type SecondExternalTypeResponse struct {
 // FieldWithExtensionRequestBody is used to define fields on request body types.
 type FieldWithExtensionRequestBody struct {
 	BarField *Bar `form:"BarField,omitempty" json:"BarField,omitempty" xml:"BarField,omitempty"`
+}
+
+// Bar is used to define fields on request body types.
+type Bar struct {
+	Bar *uint `form:"Bar,omitempty" json:"Bar,omitempty" xml:"Bar,omitempty"`
 }
 
 // ExternalTypeRequestBody is used to define fields on request body types.
@@ -126,6 +131,14 @@ func ValidateFieldWithExtensionRequestBody(body *FieldWithExtensionRequestBody) 
 		if err2 := ValidateBar(body.BarField); err2 != nil {
 			err = goa.MergeErrors(err, err2)
 		}
+	}
+	return
+}
+
+// ValidateBar runs the validations defined on Bar
+func ValidateBar(body *Bar) (err error) {
+	if body.Bar == nil {
+		err = goa.MergeErrors(err, goa.MissingFieldError("Bar", "body"))
 	}
 	return
 }
