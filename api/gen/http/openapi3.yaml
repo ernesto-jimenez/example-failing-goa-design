@@ -39,53 +39,53 @@ paths:
                                 example:
                                     - DateField: "1988-07-10T21:21:45Z"
                                       External:
-                                        Field: Rerum aut atque animi.
+                                        Field: Suscipit rerum aut atque animi ut et.
                                       FieldWithExtension:
                                         BarField:
-                                            Bar: 10644113808551616344
+                                            Bar: 12728010016061705013
                                       SecondExternal:
-                                        Field: Et quisquam quia ab quia rerum.
+                                        Field: Quia ab quia rerum.
                                     - DateField: "1988-07-10T21:21:45Z"
                                       External:
-                                        Field: Rerum aut atque animi.
+                                        Field: Suscipit rerum aut atque animi ut et.
                                       FieldWithExtension:
                                         BarField:
-                                            Bar: 10644113808551616344
+                                            Bar: 12728010016061705013
                                       SecondExternal:
-                                        Field: Et quisquam quia ab quia rerum.
+                                        Field: Quia ab quia rerum.
                             example:
                                 - DateField: "1988-07-10T21:21:45Z"
                                   External:
-                                    Field: Rerum aut atque animi.
+                                    Field: Suscipit rerum aut atque animi ut et.
                                   FieldWithExtension:
                                     BarField:
-                                        Bar: 10644113808551616344
+                                        Bar: 12728010016061705013
                                   SecondExternal:
-                                    Field: Et quisquam quia ab quia rerum.
+                                    Field: Quia ab quia rerum.
                                 - DateField: "1988-07-10T21:21:45Z"
                                   External:
-                                    Field: Rerum aut atque animi.
+                                    Field: Suscipit rerum aut atque animi ut et.
                                   FieldWithExtension:
                                     BarField:
-                                        Bar: 10644113808551616344
+                                        Bar: 12728010016061705013
                                   SecondExternal:
-                                    Field: Et quisquam quia ab quia rerum.
+                                    Field: Quia ab quia rerum.
                                 - DateField: "1988-07-10T21:21:45Z"
                                   External:
-                                    Field: Rerum aut atque animi.
+                                    Field: Suscipit rerum aut atque animi ut et.
                                   FieldWithExtension:
                                     BarField:
-                                        Bar: 10644113808551616344
+                                        Bar: 12728010016061705013
                                   SecondExternal:
-                                    Field: Et quisquam quia ab quia rerum.
+                                    Field: Quia ab quia rerum.
                                 - DateField: "1988-07-10T21:21:45Z"
                                   External:
-                                    Field: Rerum aut atque animi.
+                                    Field: Suscipit rerum aut atque animi ut et.
                                   FieldWithExtension:
                                     BarField:
-                                        Bar: 10644113808551616344
+                                        Bar: 12728010016061705013
                                   SecondExternal:
-                                    Field: Et quisquam quia ab quia rerum.
+                                    Field: Quia ab quia rerum.
 components:
     schemas:
         Bar:

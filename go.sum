@@ -51,6 +51,8 @@ goa.design/goa/v3 v3.7.13-0.20220718204326-07ac985d9332 h1:LzpZAOTiN74/VvuSDfVLc
 goa.design/goa/v3 v3.7.13-0.20220718204326-07ac985d9332/go.mod h1:iAZRP2wqf2Fu++CWt7Qfoxe3iVMkKqlsFAEF2kcxs28=
 goa.design/goa/v3 v3.7.13-0.20220720043741-6be5979aa8df h1:TBPijx3NFTqLKUr3bz0hUrFj/sg0h6aaHtND87JHjOA=
 goa.design/goa/v3 v3.7.13-0.20220720043741-6be5979aa8df/go.mod h1:iAZRP2wqf2Fu++CWt7Qfoxe3iVMkKqlsFAEF2kcxs28=
+goa.design/goa/v3 v3.7.13 h1:4C1lF5dK/OjMJzzHLvSDUiSHD3rj7OkVxlxlOw6Yp24=
+goa.design/goa/v3 v3.7.13/go.mod h1:iAZRP2wqf2Fu++CWt7Qfoxe3iVMkKqlsFAEF2kcxs28=
 golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 h1:6zppjxzCulZykYSLyVDYbneBfbaBIQPYMevg0bEwv2s=
 golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4/go.mod h1:jJ57K6gSWd91VN4djpZkiMVwK6gcyfeH4XE8wZrZaV4=
 golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a h1:dGzPydgVsqGcTRVwiLJ1jVbufYwmzD3LfVPLKsKg+0k=

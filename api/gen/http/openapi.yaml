@@ -42,18 +42,6 @@ definitions:
         properties:
             Bar:
                 type: integer
-                example: 8826312341156486649
-                format: int64
-        example:
-            Bar: 2579935120337244338
-        required:
-            - Bar
-    BarResponse:
-        title: BarResponse
-        type: object
-        properties:
-            Bar:
-                type: integer
                 example: 2959201625900554196
                 format: int64
         example:
@@ -77,12 +65,12 @@ definitions:
         example:
             DateField: "1989-05-01T13:46:14Z"
             External:
-                Field: Rerum aut atque animi.
+                Field: Suscipit rerum aut atque animi ut et.
             FieldWithExtension:
                 BarField:
-                    Bar: 10644113808551616344
+                    Bar: 12728010016061705013
             SecondExternal:
-                Field: Et quisquam quia ab quia rerum.
+                Field: Quia ab quia rerum.
         required:
             - DateField
     ExternalTypeRequestBody:
@@ -91,9 +79,9 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Aut in distinctio.
+                example: Nihil qui aut.
         example:
-            Field: Atque vel omnis molestiae occaecati quia.
+            Field: Distinctio eligendi atque vel omnis molestiae occaecati.
         required:
             - Field
     ExternalTypeResponse:
@@ -121,10 +109,10 @@ definitions:
         type: object
         properties:
             BarField:
-                $ref: '#/definitions/BarResponse'
+                $ref: '#/definitions/Bar'
         example:
             BarField:
-                Bar: 10644113808551616344
+                Bar: 12728010016061705013
     FooServiceFooMethodRequestBody:
         title: FooServiceFooMethodRequestBody
         type: object
@@ -156,7 +144,7 @@ definitions:
         properties:
             Field:
                 type: string
-                example: Quo quaerat aut et.
+                example: Tempore quo quaerat aut et.
         example:
             Field: Est ea.
     SecondExternalTypeResponse:
